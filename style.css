@@ -124,8 +124,8 @@ h5{
 }
 
 .button-L{
-  width: 80px;
-  height: 80px;
+  width: 104pxpx;
+  height: 104px;
 
 }
 
@@ -162,18 +162,20 @@ h5{
 
 .control-group{
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 23px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  height: 24px;
+  gap: 24px;
 }
 
 .radio-container {
-  display: flex;
   position: relative;
-  width: 24px;
-  height: 24px;
+  width:24px;
+  height:24px;
   cursor: pointer;
   user-select: none;
+
 }
 
 .radio-container input {
@@ -184,8 +186,8 @@ h5{
 
 .radio-checkmark {
   position: absolute;
-  top: 3px;
-  left: 3px;
+  top: 1px;
+  left: 1px;
   height: 18px;
   width: 18px;
   background-color: #ffffff;
@@ -225,19 +227,81 @@ h5{
 
 .checkbox-container{
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: 24px;
   height: 24px;
   cursor: pointer;
   user-select: none;
-  background-color: #1b1b1c;
+
 }
 
-.checkbox{
+.checkbox-container input {
+
+  opacity: 0;
+}
+
+.checkbox-container input:checked ~ .checkmark {
   width: 18px;
   height: 18px;
-  background-color: blueviolet;
+  border-color: #1B1B1C;
+  background-color: #1b1b1c; /* ここで背景色を設定 */
+  border-radius: 2px;
+  opacity: 0; /* 初期状態では透明 */
+  animation: opacityEffect 200ms cubic-bezier(0.3, 0, 0, 1) forwards; /* アニメーション適用 */
+
+}
+
+
+.checkmark {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background-color: #FFF;
+  border: 2px solid #1b1b1c;
+  border-radius: 2px;
+  /* 初期状態では疑似要素を表示しないため、ここではopacityを設定しない */
+}
+
+.checkmark-mark{
+  position: absolute;
+  margin: 0px;
+  padding: ;
+  top: -3px;
+  left: -3px;
+  width: 24px;
+  height: 24px;
+  fill: none;
 }
 
 
 
+.checkbox-container input:checked ~ .checkmark .path {
+  stroke: #ffffff;
+  stroke-width: 2;
+  stroke-linecap: round; /* ストロークの先を丸くする */
+  stroke-linejoin: round; 
+  stroke-dasharray: 29; /* パスの全長に相当する値 */
+  stroke-dashoffset: 29; /* アニメーション開始時の値 */
+  animation: draw 400ms cubic-bezier(0.3, 0, 0, 1) forwards; /* ここでアニメーションを適用 */
+}
+
+
+@keyframes opacityEffect {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 29; /* ここでパスの全長を指定 */
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+} */
