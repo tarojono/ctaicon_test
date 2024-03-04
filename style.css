@@ -11,7 +11,7 @@ body{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 32px;
+  gap: 72px;
   width: 652px;
   
   
@@ -50,7 +50,7 @@ h1{
   font-family: "Futura PT";
   font-size: 55px;
   font-style: normal;
-  font-weight: 450;
+  font-weight: 500;
   line-height: 110%; /* 61.6px */
   -webkit-font-smoothing: antialiased; /* WebKitブラウザ用 (例: Safari, Chrome) */
   -moz-osx-font-smoothing: grayscale; 
@@ -238,7 +238,6 @@ h5{
 }
 
 .checkbox-container input {
-
   opacity: 0;
 }
 
@@ -284,7 +283,56 @@ h5{
   stroke-linejoin: round; 
   stroke-dasharray: 29; /* パスの全長に相当する値 */
   stroke-dashoffset: 29; /* アニメーション開始時の値 */
-  animation: draw 400ms cubic-bezier(0.3, 0, 0, 1) forwards; /* ここでアニメーションを適用 */
+  animation: draw 1000ms cubic-bezier(0.3, 0, 0, 1) forwards; /* ここでアニメーションを適用 */
+}
+
+
+.switch-container{
+  width: 40px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type=checkbox]{
+  height: 0;
+  width:0;
+  display: none;
+}
+
+.switch-label{
+  width: 36px;
+  height: 20px;
+  border-radius: 9999px;
+  background-color: #f2f2f7;
+  display: block;
+  position: relative;
+  text-indent: -9999px;
+  padding: 0px;
+  transition: 200ms cubic-bezier(0.3, 0, 0, 1);
+}
+
+.switch-label::after{
+  content: "";
+  top: 2px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  position: absolute;
+  background-color:#1b1b1c;
+  padding: 0px;
+  transition: 200ms cubic-bezier(0.3, 0, 0, 1);
+}
+
+input.switch-input:checked + .switch-label::after{
+  left: 18px;
+  background-color: #ffffff;
+}
+
+input.switch-input:checked + .switch-label{
+  background-color: #1B1B1C;
 }
 
 
