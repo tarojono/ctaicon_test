@@ -2,9 +2,13 @@
 const animationsConfig = [
   { containerId: 'contact', iconId: 'contact-icon', path: 'contact_white.json', defaultFrames: [0, 48], hoverFrames: [49, 61], clickFrames: [62, 74] },
   { containerId: 'docrequest', iconId: 'docrequest-icon', path: 'docrequest_white.json', defaultFrames: [0, 48], hoverFrames: [49, 61], clickFrames: [62, 74] },
-  { containerId: 'registration', iconId: 'registration-icon', path: 'registration_white.json', defaultFrames: [0, 72], hoverFrames: [72, 84], clickFrames: [84, 96] }
-];
+  { containerId: 'registration', iconId: 'registration-icon', path: 'registration_white.json', defaultFrames: [0, 72], hoverFrames: [72, 84], clickFrames: [84, 96] },
+  { containerId: 'contact', iconId: 'contact-L', path: 'contact_black.json', defaultFrames: [0, 48], hoverFrames: [49, 61], clickFrames: [62, 74] },
+  { containerId: 'docrequest', iconId: 'docrequest-L', path: 'docrequest_black.json', defaultFrames: [0, 48], hoverFrames: [49, 61], clickFrames: [62, 74] },
+  { containerId: 'registration', iconId: 'registration-L', path: 'registration_black.json', defaultFrames: [0, 72], hoverFrames: [72, 84], clickFrames: [84, 96] },
 
+
+];
 // アニメーションのロードとイベントハンドラの設定
 animationsConfig.forEach(config => {
   // アイコンコンテナの要素を取得
@@ -15,16 +19,26 @@ animationsConfig.forEach(config => {
     container: iconContainer,
     renderer: 'svg',
     loop: false,
-    autoplay: TransformStreamDefaultController,
+    autoplay: false,
     path: config.path
   });
+
+
+  // アニメーションのロードが完了したらデフォルトフレームセグメントを再生
+  animation.addEventListener('DOMLoaded', () => {
+    animation.playSegments(config.defaultFrames, true);
+  });
+
 
   // ボタンコンテナの要素を取得
   const buttonContainer = document.getElementById(config.containerId);
 
   // ホバー時の挙動
-  buttonContainer.addEventListener('mouseover', () => {
-    animation.playSegments(config.hoverFrames, true);
+  buttonContainer.addEventListener('mouseover', (event) => {
+    // イベントがbuttonContainerに直接発生した場合のみアニメーションを再生
+    if (event.target === event.currentTarget) {
+      animation.playSegments(config.hoverFrames, true);
+    }
   });
 
   // ホバーから離れた時の挙動
@@ -36,73 +50,12 @@ animationsConfig.forEach(config => {
   buttonContainer.addEventListener('click', () => {
     animation.playSegments(config.clickFrames, true);
   });
+
+  
 });
 
+// script.js
+document.getElementById('playbutton').addEventListener('click', function() {
+  window.location.reload();
+});
 
-// アニメーション設定
-// const animationsConfig = [
-//   { id: 'contact-icon', path: 'contact_white.json', defaultFrames: [0, 48], hoverFrames: [49, 61], clickFrames: [62, 74] },
-//   { id: 'docrequest-icon', path: 'docrequest _white.json', defaultFrames: [0, 48], hoverFrames: [49, 61], clickFrames: [62, 74] },
-//   { id: 'registration-icon', path: 'registration_white.json', defaultFrames: [0, 72], hoverFrames: [72, 84], clickFrames: [84, 96] }
-// ];
-
-// // アニメーションのロードとイベントハンドラの設定
-// animationsConfig.forEach(config => {
-//   const animation = lottie.loadAnimation({
-//     container: document.getElementById(config.id),
-//     renderer: 'svg',
-//     loop: false,
-//     autoplay: false,
-//     path: config.path
-//   });
-
-//   // アニメーションがロードされたらデフォルトフレームを再生
-//   animation.addEventListener('DOMLoaded', () => {
-//     animation.playSegments(config.defaultFrames, true);
-//   });
-
-//   // ホバー時の挙動
-//   document.getElementById(config.id).addEventListener('mouseover', () => {
-//     animation.playSegments(config.hoverFrames, true);
-//   });
-
-//   // ホバーから離れた時の挙動
-//   document.getElementById(config.id).addEventListener('mouseleave', () => {
-//     animation.playSegments(config.defaultFrames, true);
-//   });
-
-//   // クリック時の挙動
-//   document.getElementById(config.id).addEventListener('click', () => {
-//     animation.playSegments(config.clickFrames, true);
-//   });
-// });// 
-
-
-// const animations = [
-//   { containerId: 'contact-icon', jsonPath: 'contact_white.json' },
-//   { containerId: 'docrequest-icon', jsonPath: 'docrequest _white.json' },
-//   { containerId: 'registration-icon', jsonPath: 'registration_white.json' },
-// ];
-
-// animations.forEach(animation => {
-//   lottie.loadAnimation({
-//     container: document.getElementById(animation.containerId),
-//     renderer: 'svg',
-//     loop: false,
-//     autoplay: true,
-//     path: animation.jsonPath
-//   });
-// });
-
-
-
-
-
-// // アニメーションをロード
-// var animation = lottie.loadAnimation({
-//   container: document.getElementById('contact-icon'),
-//   renderer: 'svg',
-//   loop: false,
-//   autoplay: true,
-//   path: 'contact_white.json'
-// });
