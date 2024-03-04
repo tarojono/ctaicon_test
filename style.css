@@ -47,7 +47,7 @@ h1{
   color: var(--Semantic-Communication-Content-primary, #1B1B1C);
   text-align: center;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: "Futura PT";
+  font-family: "Futura PT", "Helvetica", "Arial", sans-serif;
   font-size: 55px;
   font-style: normal;
   font-weight: 500;
@@ -62,7 +62,7 @@ h6{
   font-feature-settings: 'palt' on, 'clig' off, 'liga' off;
   
   /* Com/JP/Narrow/Heading/XS */
-  font-family: "Noto Sans JP";
+  font-family: "Noto Sans JP", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -327,7 +327,8 @@ input[type=checkbox]{
 }
 
 input.switch-input:checked + .switch-label::after{
-  left: 18px;
+  left: calc(100% - 3px);
+  transform: translateX(-100%);
   background-color: #ffffff;
 }
 
@@ -335,6 +336,9 @@ input.switch-input:checked + .switch-label{
   background-color: #1B1B1C;
 }
 
+.switch-label:active:after {
+	width: 20px;
+}
 
 @keyframes opacityEffect {
   from {
