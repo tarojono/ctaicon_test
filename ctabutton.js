@@ -33,17 +33,21 @@ animationsConfig.forEach(config => {
   // ボタンコンテナの要素を取得
   const buttonContainer = document.getElementById(config.containerId);
 
+  // ホバー状態を追跡する変数
+  let isHovered = false;
+
   // ホバー時の挙動
   buttonContainer.addEventListener('mouseover', (event) => {
-    // イベントがbuttonContainerに直接発生した場合のみアニメーションを再生
-    if (event.target === event.currentTarget) {
+    if (!isHovered) {
       animation.playSegments(config.hoverFrames, true);
+      isHovered = true;
     }
   });
 
   // ホバーから離れた時の挙動
   buttonContainer.addEventListener('mouseleave', () => {
-    animation.playSegments(config.defaultFrames, true);
+    animation.playSegments([config.hoverFrames[1], config.hoverFrames[0]], true);
+    isHovered = false;
   });
 
   // クリック時の挙動
